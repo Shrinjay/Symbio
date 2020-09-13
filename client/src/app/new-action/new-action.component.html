@@ -1,0 +1,45 @@
+<div class="modal show" id="actionModal" tabindex="-1" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add a new action</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="newAction" (ngSubmit)="onSubmit(newAction.value)">
+        <div class="modal-body">
+          
+              <div>
+                  <label for="actionType">What Happened?</label>
+                  <select class="form-control" id="actionType" formControlName="actionType">
+                      <option>First Contact</option>
+                      <option>Follow Up</option>
+                      <option>Discussion</option>
+                      <option>Proposal</option>
+                      <option>Finalization</option>
+                  </select>
+              </div>
+              <div>
+                  <label for="actionDate">When did this happen?</label>
+                  <input id="actionDate" type="text" class="form-control" formControlName="actionDate">
+              </div>
+              <div>
+                  <label for="actionUser">Who did this?</label>
+                  <input id="actionUser" type="text" class="form-control" formControlName="actionUser">
+              </div>
+              <div>
+                  <label for="actionDetails">Additional Details?</label>
+                  <textarea id="actionDetails" class="form-control" formControlName="actionDetails" rows="2"></textarea>
+              </div>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+

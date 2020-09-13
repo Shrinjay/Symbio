@@ -1,0 +1,46 @@
+
+
+<button type='button' class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add Partner</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add a Partner Here</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="newSponsor" (ngSubmit)="onSubmit(newSponsor.value)">
+        <div class="modal-body">
+           <div class="form-group">
+            <div>
+                <label for="sponsorName">Sponsor Name:</label>
+                <input id="sponsorName" class="form-control" type="text" formControlName="sponsorName">
+            </div>
+            <div>
+                <label for="contactName">Sponsor Contact Person:</label>
+                <input id="contactName" class="form-control" type="text" formControlName="contactName">
+            </div>
+            <div>
+                <label for="contactEmail">Sponsor Contact Email:</label>
+                <input id="contactEmail" class="form-control" type="text" formControlName="contactEmail">
+            </div>
+            <div>
+                <label for="status">Sponsor Status (Identified, Contacted, Negotiating, Established</label>
+                <input id="status" class="form-control" type="text" formControlName="status">
+            </div>
+            <div>
+                <label for="image">Upload image:</label>
+                <input id="image" class="form-control" type="file" (change)="onFileChange($event)">
+            </div>
+           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add New Partner</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>

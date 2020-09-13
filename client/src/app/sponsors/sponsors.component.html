@@ -1,0 +1,25 @@
+<h2>Sponsors</h2>
+
+<div class="container">
+    <div class="row">
+        <div class='col-6' *ngFor='let sponsor of sponsors, index as i'>
+           
+            <div class="card">
+                <div class='card-body'>
+                    <img src={{images[sponsor.sponsorName]}} style="max-width: 12rem">
+                    <h3 class='card-title'>{{sponsor.sponsorName}}</h3>
+                    <div class='card-text'>
+                        <ul>
+                            <li>Contact Name: {{sponsor.contactName}}</li>
+                            <li>Contact Email: {{sponsor.contactEmail}}</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary" (click)="onClick($event)" id="{{sponsor._id}}">Add Action</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-new-sponsor></app-new-sponsor>
+<app-new-action *ngIf="selected" [selected]="selected"></app-new-action>
