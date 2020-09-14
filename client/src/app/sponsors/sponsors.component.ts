@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {SponsorService} from '../sponsor-service.service';
 import {Sponsor} from '../Sponsor';
 import {DomSanitizer} from '@angular/platform-browser'
+
+
 @Component({
   selector: 'app-sponsors',
   templateUrl: './sponsors.component.html',
@@ -17,6 +19,7 @@ export class SponsorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes()
+    this.sponsorService.testCrypt("peepeepoopoo")
   }
 
   onClick(event): void {

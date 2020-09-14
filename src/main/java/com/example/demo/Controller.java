@@ -24,6 +24,7 @@ import com.mongodb.client.MongoDatabase;
 import com.models.sponsors;
 import com.repository.sponsorsRepo;
 import com.models.actions;
+import com.models.mailReq;
 
 import java.util.List;
 import java.net.URI;
@@ -34,6 +35,8 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.lang.StringBuilder;
 import java.util.Properties;
@@ -51,12 +54,20 @@ import java.nio.charset.StandardCharsets;
  
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.BodyPart;
+import javax.mail.Part;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.search.SearchTerm;
 import javax.mail.search.SubjectTerm;
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+
+
 
 /*This is a controller class. It controls the view based on models, which are accessed through repositories*/
 
@@ -154,9 +165,52 @@ public class Controller {
            }       
     }
 
+    private boolean textIsHtml = false;
+
+    private String getText(Part p) throws
+                MessagingException, IOException {
+        if (p.isMimeType("text/*")) {
+            String s = (String)p.getContent();
+            textIsHtml = p.isMimeType("text/html");
+            return s;
+        }
+
+        if (p.isMimeType("multipart/alternative")) {
+            // prefer html text over plain text
+            Multipart mp = (Multipart)p.getContent();
+            String text = null;
+            for (int i = 0; i < mp.getCount(); i++) {
+                Part bp = mp.getBodyPart(i);
+                if (bp.isMimeType("text/plain")) {
+                    if (text == null)
+                        text = getText(bp);
+                    continue;
+                } else if (bp.isMimeType("text/html")) {
+                    String s = Jsoup.parse(getText(bp)).text();
+                    if (s != null)
+                        return s;
+                } else {
+                    return getText(bp);
+                }
+            }
+            return text;
+        } else if (p.isMimeType("multipart/*")) {
+            Multipart mp = (Multipart)p.getContent();
+            for (int i = 0; i < mp.getCount(); i++) {
+                String s = getText(mp.getBodyPart(i));
+                if (s != null)
+                    return s;
+            }
+        }
+
+        return null;
+    }
+
     @CrossOrigin
     @GetMapping("/api/mail")
-    public HashMap<Date, String> getMail() {
+    public HashMap<Date, String> getMail(@RequestBody mailReq req) {
+
+        
         System.out.println("searching...");
         Properties mailProps = new Properties();
 
@@ -172,12 +226,12 @@ public class Controller {
 
         try {
             Store store = session.getStore("imap");
-            store.connect(dotenv.get("test_email"), dotenv.get("email_pass"));
+            store.connect(req.email, req.pass);
     
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_ONLY);
             
-            SearchTerm condition = new SubjectTerm("TKS");
+            SearchTerm condition = new SubjectTerm(req.keyword);
 
             Message[] found = inbox.search(condition);
             
@@ -185,7 +239,9 @@ public class Controller {
             for(int i=0; i<found.length; i++)
             {
                 Message message = found[i];
-                res.put(message.getReceivedDate(), message.getContent().toString());
+                String body = getText(message);
+
+                res.put(message.getReceivedDate(), body);
                 
             }
             

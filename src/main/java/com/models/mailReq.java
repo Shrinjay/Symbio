@@ -1,0 +1,26 @@
+package com.models;
+
+public class mailReq{
+
+    public String email;
+    public String pass;
+    public String keyword;
+
+    public mailReq(String email, String pass, String keyword)
+    {
+        this.email = email;
+        this.pass = pass;
+        this.keyword = keyword;
+    }
+
+    public String get_email() {return email;}
+    public void set_email(String email) {this.email = email;}
+
+    public String get_pass() {return pass;}
+    public void set_pass(String pass) {this.pass = pass;}
+
+    public String get_keyword() {return keyword;}
+    public void set_keyword(String keyword) {this.keyword = keyword;}
+
+
+}
