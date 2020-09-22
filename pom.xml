@@ -26,6 +26,13 @@
 
 	<dependencies>
 
+<dependency>
+    <groupId>com.vladmihalcea</groupId>
+    <artifactId>hibernate-types-52</artifactId>
+    <version>2.9.13</version>
+</dependency>
+
+
 	<dependency>
     <groupId>io.github.cdimascio</groupId>
     <artifactId>java-dotenv</artifactId>
@@ -36,12 +43,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
-    <groupId>org.springframework.data</groupId>
-    <artifactId>spring-data-mongodb</artifactId>
-    <version>3.0.3.RELEASE</version>
-</dependency>
+		
 
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -53,16 +60,24 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		 <dependency>
-       		 <groupId>org.mongodb</groupId>
-        	<artifactId>mongodb-driver-sync</artifactId>
-       		 <version>4.1.0</version>
-    		</dependency>
+		
 <dependency>
 	    <groupId>org.json</groupId>
 	    <artifactId>json</artifactId>
 	    <version>20180130</version>
 	</dependency>
+
+	       <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+	<dependency>
+    <groupId>javax.persistence</groupId>
+    <artifactId>javax.persistence-api</artifactId>
+    <version>2.2</version>
+</dependency>
 	
 
 		<dependency>
@@ -81,6 +96,18 @@
   <artifactId>jsoup</artifactId>
   <version>1.13.1</version>
 </dependency>
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>6.0.0.Alpha6</version>
+    <type>pom</type>
+</dependency>
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>2.11.2</version>
+</dependency>
+
 	</dependencies>
 
 	<build>

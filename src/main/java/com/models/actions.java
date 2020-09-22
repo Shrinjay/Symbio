@@ -1,39 +1,60 @@
 package com.models;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import com.models.sponsors;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="actions")
 public class actions {
+   
     @Id
-    public ObjectId _id;
+    @GeneratedValue
+    public long _id;
+  
 
-    public String actionType;
-    public String actionDate;
-    public String actionUser;
-    public String actionDetails;
+    @Column(name="actiontype")
+    public String actiontype;
+    @Column(name="actiondate")
+    public String actiondate;
+    @Column(name="actionuser")
+    public String actionuser;
+    @Column(name="actiondetails")
+    public String actiondetails;
 
-    public actions(ObjectId _id, String actionType, String actionDate, String actionUser, String actionDetails)
+    public actions() {}
+
+    public actions(long _id, String actiontype, String actiondate, String actionuser, String actiondetails)
     {
-        
         this._id = _id;
-        this.actionType = actionType;
-        this.actionDate = actionDate; 
-        this.actionUser = actionUser; 
-        this.actionDetails = actionDetails;
+        this.actiontype = actiontype;
+        this.actiondate = actiondate; 
+        this.actionuser = actionuser; 
+        this.actiondetails = actiondetails;
     }
 
-    public String get_id(){return _id.toHexString();}
-    public void set_id(ObjectId _id) {this._id = _id;}
 
-    public String get_actionType() {return actionType;}
-    public void set_actionType(String actionType) {this.actionType = actionType;}
 
-    public String get_actionDate() {return actionDate;}
-    public void set_actionDate(String actionDate) {this.actionDate = actionDate;}
+    public long get_id(){return _id;}
+    public void set_id(long _id) {this._id = _id;}
 
-    public String get_actionUser() {return actionUser;}
-    public void set_actionUser(String actionUser) {this.actionUser = actionUser;}
+    public String get_actiontype() {return actiontype;}
+    public void set_actiontype(String actiontype) {this.actiontype = actiontype;}
 
-    public String get_actionDetails() {return actionDetails;}
-    public void set_actionDetails(String actionDetails) {this.actionDetails = actionDetails;}
+    public String get_actiondate() {return actiondate;}
+    public void set_actiondate(String actiondate) {this.actiondate = actiondate;}
+
+    public String get_actionuser() {return actionuser;}
+    public void set_actionuser(String actionuser) {this.actionuser = actionuser;}
+
+    public String get_actiondetails() {return actiondetails;}
+    public void set_actiondetails(String actiondetails) {this.actiondetails = actiondetails;}
 }

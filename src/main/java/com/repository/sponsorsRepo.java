@@ -1,10 +1,12 @@
 package com.repository;
 
 import com.models.sponsors;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface sponsorsRepo extends MongoRepository<sponsors, String>{
-    sponsors findBy_id(ObjectId _id);
-    sponsors findBySponsorName(String sponsorName);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface sponsorsRepo extends JpaRepository<sponsors, Long>{
+    sponsors findBy_id(long _id);
+    sponsors findOneBysponsorname(String sponsorname);
 }

@@ -6,12 +6,21 @@
            
             <div class="card">
                 <div class='card-body'>
-                    <img src={{images[sponsor.sponsorName]}} style="max-width: 12rem">
-                    <h3 class='card-title'>{{sponsor.sponsorName}}</h3>
+                    <img src={{images[sponsor.sponsorname]}} style="max-width: 12rem">
+                    <h3 class='card-title'>{{sponsor.sponsorname}}</h3>
                     <div class='card-text'>
                         <ul>
-                            <li>Contact Name: {{sponsor.contactName}}</li>
-                            <li>Contact Email: {{sponsor.contactEmail}}</li>
+                            <li>Contact Name: {{sponsor.contactname}}</li>
+                            <li>Contact Email: {{sponsor.contactemail}}</li>
+                        </ul>
+                        <h3>Recent Actions</h3>
+                        <ul *ngFor='let action of sponsor.sponsoractions, let i = index'>
+                            <li><b>{{action.actiondate}}</b></li>
+                            <ul>
+                                <li><b>Type: </b>{{action.actiontype}}</li>
+                                <li><b>User: </b>{{action.actionuser}}</li>
+                                <li><b>Details: </b>{{action.actiondetails}}</li>
+                            </ul>
                         </ul>
                     </div>
                     <button class="btn btn-primary" (click)="onClick($event)" id="{{sponsor._id}}">Add Action</button>

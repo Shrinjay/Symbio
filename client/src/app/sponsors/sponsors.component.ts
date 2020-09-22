@@ -19,7 +19,7 @@ export class SponsorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes()
-    this.sponsorService.testCrypt("peepeepoopoo")
+   
   }
 
   onClick(event): void {
@@ -29,7 +29,7 @@ export class SponsorsComponent implements OnInit {
   getHeroes(): void {
       this.sponsorService.getSponsors().subscribe(sponsors => {
         this.sponsors=sponsors
-
+        console.log(sponsors)
         this.getPics()
       })
   }
@@ -39,16 +39,17 @@ export class SponsorsComponent implements OnInit {
     this.sponsors.forEach(sponsor => {
       if (sponsor.image)
       {
-        this.images[sponsor.sponsorName] = sponsor.image
+        this.images[sponsor.sponsorname] = sponsor.image
       }
       else {
     
-        this.sponsorService.getPics(sponsor.sponsorName).subscribe(res=>{
-          this.images[sponsor.sponsorName]=res['items'][0]['image']['thumbnailLink']
+        this.sponsorService.getPics(sponsor.sponsorname).subscribe(res=>{
+          this.images[sponsor.sponsorname]=res['items'][0]['image']['thumbnailLink']
           sponsor.image = res['items'][0]['image']['thumbnailLink']
           this.sponsorService.modifySponsor(sponsor)
        })
       }
+      console.log(this.images)
      })
 
    

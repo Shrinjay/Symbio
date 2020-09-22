@@ -12,14 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoClient;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.ConnectionString;
-import com.mongodb.ServerAddress;
-import com.mongodb.MongoCredential;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 import com.models.sponsors;
 import com.repository.sponsorsRepo;
@@ -42,7 +34,7 @@ import java.lang.StringBuilder;
 import java.util.Properties;
 import java.util.Date;
 
-import org.bson.types.ObjectId;
+
 import io.github.cdimascio.dotenv.Dotenv;
 import jdk.javadoc.internal.doclets.formats.html.markup.BodyContents;
 import jdk.tools.jlink.internal.plugins.ExcludePlugin;
@@ -88,6 +80,7 @@ public class Controller {
 
     @Autowired //Autowired means this is injected
     private sponsorsRepo repository;
+    
 
     @CrossOrigin
     @GetMapping("/api/sponsors") //Maps GET requests to the /greeting endpoint to the greeting() function
@@ -99,7 +92,7 @@ public class Controller {
     @PostMapping("/api/add")
     public sponsors addSponsor(@RequestBody sponsors newSponsor)
     {
-        newSponsor.set_id(ObjectId.get());
+       
         repository.save(newSponsor);
         return newSponsor;
     }
@@ -107,10 +100,7 @@ public class Controller {
     @CrossOrigin
     @PutMapping("/api/modify")
     public sponsors modifySponsors(@RequestBody sponsors newSponsor)
-    {   if (newSponsor._id == null)
-        {
-            return newSponsor;
-        }
+    {   
         newSponsor.set_id(newSponsor._id);
         repository.save(newSponsor);
         return newSponsor;
@@ -124,13 +114,10 @@ public class Controller {
         sponsors sponsor = repository.findBy_id(newAction._id);
         
         List<actions> existingActions = new ArrayList<actions>();
-        if (sponsor.get_actions()!=null)
-        {
-            existingActions = sponsor.get_actions();
-        }
-        existingActions.add(new actions(new ObjectId(), newAction.actionType, newAction.actionDate, newAction.actionUser, newAction.actionDetails));
+        if (sponsor.get_actions()!=null) existingActions = sponsor.get_actions();
+        existingActions.add(new actions(new AtomicLong().longValue(), newAction.actiontype, newAction.actiondate, newAction.actionuser, newAction.actiondetails));
         sponsor.set_actions(existingActions);
-        repository.save(sponsor);
+        repository.saveAndFlush(sponsor);
         return sponsor;
     }
 

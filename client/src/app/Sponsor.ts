@@ -1,9 +1,9 @@
 export interface Sponsor {
     _id: string, 
-    sponsorName: string,
-    contactName: string,
-    contactEmail: string,
+    sponsorname: string,
+    contactname: string,
+    contactemail: string,
     status: string, 
-    sponsorActions: any,
+    sponsoractions: any,
     image: string
 }

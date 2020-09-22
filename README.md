@@ -8,7 +8,7 @@ I'm tired of using an assortment of excel sheets, documents and an email inbox t
 
 *Current Features*: 
 
-* Store sponsor information, including sponsor name, contact person, contact email and a list of recent actions, including the type (establishing contact, neogtiating partnership, following up), and time of action taken in a MongoDB Database and Spring MVC RESTful API.
+* Store sponsor information, including sponsor name, contact person, contact email and a list of recent actions, including the type (establishing contact, neogtiating partnership, following up), and time of action taken in a PostgreSQL with a Spring MVC RESTful API.
 * Store specified sponsor logos, or find them automatically using the Google Search API. 
 * Search email inbox for specific keywords, currently sponsor names, to consolidate recent communications related to a sponsor using JavaMail.
 * A development front-end using Angular and Bootstrap, not sufficiently refined for release. 

@@ -23,9 +23,9 @@ export class SponsorService {
 
   addSponsor(sponsorName, contactName, contactEmail, status, image): any {
     this.http.post<any>('https://localhost:8080/api/add', {
-        sponsorName: sponsorName,
-        contactName: contactName,
-        contactEmail: contactEmail, 
+        sponsorname: sponsorName,
+        contactname: contactName,
+        contactemail: contactEmail, 
         status: status,
         image: image
     }).subscribe(data=>{return data})
@@ -34,9 +34,9 @@ export class SponsorService {
   modifySponsor(sponsorData): any {
     this.http.put<any>('https://localhost:8080/api/modify', {
       _id: sponsorData._id,
-      sponsorName: sponsorData.sponsorName,
-      contactName: sponsorData.contactName, 
-      contactEmail: sponsorData.contactEmail,
+      sponsorname: sponsorData.sponsorname,
+      contactname: sponsorData.contactname, 
+      contactemail: sponsorData.contactemail,
       status: sponsorData.status,
       image: sponsorData.image
     }).subscribe(data=>{return data})
@@ -45,10 +45,10 @@ export class SponsorService {
   addAction(actionData): any {
     this.http.post<any>("https://localhost:8080/api/addAction", {
       _id: actionData._id,
-      actionType: actionData.actionType,
-      actionDate: actionData.actionDate,
-      actionUser: actionData.actionUser,
-      actionDetails: actionData.actionDetails
+      actiontype: actionData.actionType,
+      actiondate: actionData.actionDate,
+      actionuser: actionData.actionUser,
+      actiondetails: actionData.actionDetails
     }).subscribe(data=>{return data})
   }
 
