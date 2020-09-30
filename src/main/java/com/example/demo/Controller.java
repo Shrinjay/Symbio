@@ -61,97 +61,12 @@ import org.jsoup.Jsoup;
 
 
 
-/*This is a controller class. It controls the view based on models, which are accessed through repositories*/
+
 
 @RestController //RestController sets this up as a controller for a REST API
 public class Controller { 
 
-    private static String encoder(String toEncode) {
-        try {
-            return URLEncoder.encode(toEncode, StandardCharsets.UTF_8.toString());
-        }
-        catch(Exception e)
-        {
-            return "Fail";
-        }
-    }
-
-    Dotenv dotenv = Dotenv.load();
-
-    @Autowired //Autowired means this is injected
-    private sponsorsRepo repository;
-    
-
-    @CrossOrigin
-    @GetMapping("/api/sponsors") //Maps GET requests to the /greeting endpoint to the greeting() function
-    public List<sponsors> greeting() { 
-        return repository.findAll();
-    }
-
-    @CrossOrigin
-    @PostMapping("/api/add")
-    public sponsors addSponsor(@RequestBody sponsors newSponsor)
-    {
-       
-        repository.save(newSponsor);
-        return newSponsor;
-    }
-
-    @CrossOrigin
-    @PutMapping("/api/modify")
-    public sponsors modifySponsors(@RequestBody sponsors newSponsor)
-    {   
-        newSponsor.set_id(newSponsor._id);
-        repository.save(newSponsor);
-        return newSponsor;
-            
-    }
-
-    @CrossOrigin
-    @PostMapping("/api/addAction")
-    public sponsors newAction(@RequestBody actions newAction)
-    {
-        sponsors sponsor = repository.findBy_id(newAction._id);
-        
-        List<actions> existingActions = new ArrayList<actions>();
-        if (sponsor.get_actions()!=null) existingActions = sponsor.get_actions();
-        existingActions.add(new actions(new AtomicLong().longValue(), newAction.actiontype, newAction.actiondate, newAction.actionuser, newAction.actiondetails));
-        sponsor.set_actions(existingActions);
-        repository.saveAndFlush(sponsor);
-        return sponsor;
-    }
-
-    @CrossOrigin
-    @GetMapping("/api/images")
-    public String getImages(@RequestParam String name) 
-    {
-        
-        
-        StringBuilder req = new StringBuilder("https://www.googleapis.com/customsearch/v1?");
-        req.append("key=");
-        req.append(dotenv.get("API_KEY"));
-        req.append("&cx=");
-        req.append(dotenv.get("CX_KEY"));
-        req.append("&q=");
-        req.append(encoder(name));
-        req.append("&searchType=image&alt=json");
-
-        String finalReq = req.toString();
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(finalReq))
-            .build();
-
-           try {
-            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-            return response.body();
-           }
-           catch(Exception e) {
-               return "Fail";
-           }       
-    }
-
+    //Function used to turn MIME protocol messages into plain-text.
     private boolean textIsHtml = false;
 
     private String getText(Part p) throws
@@ -193,8 +108,101 @@ public class Controller {
         return null;
     }
 
+    //Function used to encode URL strings
+    private static String encoder(String toEncode) {
+        try {
+            return URLEncoder.encode(toEncode, StandardCharsets.UTF_8.toString());
+        }
+        catch(Exception e)
+        {
+            return "Fail";
+        }
+    }
+    //Load dotenv to access .env file
+    Dotenv dotenv = Dotenv.load();
+    //Inject sponsors repository
+    @Autowired 
+    private sponsorsRepo repository;
+    
+    //Endpoint to get all sponsors
     @CrossOrigin
-    @GetMapping("/api/mail")
+    @GetMapping("/api/sponsors") //Maps GET requests to the /greeting endpoint to the greeting() function
+    public List<sponsors> greeting() { 
+        return repository.findAll();
+    }
+
+    //Endpoint to add a new sponsor.
+    @CrossOrigin
+    @PostMapping("/api/add")
+    public sponsors addSponsor(@RequestBody sponsors newSponsor)
+    {
+       
+        repository.save(newSponsor);
+        return newSponsor;
+    }
+
+    //Endpoint to modify a sponsor.
+    @CrossOrigin
+    @PutMapping("/api/modify")
+    public sponsors modifySponsors(@RequestBody sponsors newSponsor)
+    {   
+        newSponsor.set_id(newSponsor._id);
+        repository.save(newSponsor);
+        return newSponsor;
+            
+    }
+
+    //Endpoint to add an action to a sponsor
+    @CrossOrigin
+    @PostMapping("/api/addAction")
+    public sponsors newAction(@RequestBody actions newAction)
+    {
+        sponsors sponsor = repository.findBy_id(newAction._id);
+        
+        List<actions> existingActions = new ArrayList<actions>();
+        if (sponsor.get_actions()!=null) existingActions = sponsor.get_actions();
+        existingActions.add(new actions(new AtomicLong().longValue(), newAction.actiontype, newAction.actiondate, newAction.actionuser, newAction.actiondetails));
+        sponsor.set_actions(existingActions);
+        repository.saveAndFlush(sponsor);
+        return sponsor;
+    }
+
+    //Endpoint to get an image from the google images AP.
+    @CrossOrigin
+    @GetMapping("/api/images")
+    public String getImages(@RequestParam String name) 
+    {
+        
+        
+        StringBuilder req = new StringBuilder("https://www.googleapis.com/customsearch/v1?");
+        req.append("key=");
+        req.append(dotenv.get("API_KEY"));
+        req.append("&cx=");
+        req.append(dotenv.get("CX_KEY"));
+        req.append("&q=");
+        req.append(encoder(name));
+        req.append("&searchType=image&alt=json");
+
+        String finalReq = req.toString();
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(finalReq))
+            .build();
+
+           try {
+            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+            return response.body();
+           }
+           catch(Exception e) {
+               return "Fail";
+           }       
+    }
+
+    
+    //Endpoint to get email from user's inbox. 
+    @CrossOrigin
+    @PostMapping("/api/mail")
     public HashMap<Date, String> getMail(@RequestBody mailReq req) {
 
         
@@ -226,7 +234,7 @@ public class Controller {
             for(int i=0; i<found.length; i++)
             {
                 Message message = found[i];
-                String body = getText(message);
+                String body = getText(message).substring(0, 300);
 
                 res.put(message.getReceivedDate(), body);
                 

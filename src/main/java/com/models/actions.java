@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+//Java object defining fields for an action
 @Entity
 @Table(name="actions")
 public class actions {

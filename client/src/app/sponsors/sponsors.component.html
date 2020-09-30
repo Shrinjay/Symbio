@@ -1,3 +1,4 @@
+<!--HTML component to display list of sponsors-->
 <h2>Sponsors</h2>
 
 <div class="container">
@@ -22,8 +23,12 @@
                                 <li><b>Details: </b>{{action.actiondetails}}</li>
                             </ul>
                         </ul>
+                        <ul *ngFor='let mail of emails[sponsor.sponsorname]'>
+                            <li>{{mail}}</li>
+                        </ul>
                     </div>
                     <button class="btn btn-primary" (click)="onClick($event)" id="{{sponsor._id}}">Add Action</button>
+                    
                 </div>
             </div>
         </div>

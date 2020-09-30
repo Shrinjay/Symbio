@@ -19,7 +19,7 @@ import javax.persistence.Lob;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
-/*This is a POJO, it acts as a model and defines the field using a java object which is instantiated*/
+//Java object to define the "sponsors" table
 @Entity
 @Table(name="sponsors")
 public class sponsors {

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {SponsorService} from '../sponsor-service.service';
 import { Sponsor } from '../Sponsor';
+
+//Handle form logic and API request to add a new sponsor.
 @Component({
   selector: 'app-new-sponsor',
   templateUrl: './new-sponsor.component.html',
@@ -22,12 +24,14 @@ export class NewSponsorComponent implements OnInit {
     })
   }
 
+  //Handle submission through sponsorService
   onSubmit(data) {
     this.sponsorService.addSponsor(data.sponsorName, data.contactName, data.contactEmail, data.status, data.image)
     .then(()=>{this.newSponsor.reset()
       window.location.reload(); })
   }
 
+  //Read file upload into byte-64 image string
   onFileChange(event) {
     const reader = new FileReader()
 

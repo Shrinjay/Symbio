@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {SponsorService} from '../sponsor-service.service';
 declare var $: any;
 
+//Handle form input and API request for adding new actions
 @Component({
   selector: 'app-new-action',
   templateUrl: './new-action.component.html',

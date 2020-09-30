@@ -1,5 +1,6 @@
 package com.models;
 
+//Java object defining fields for a request from the front end to fetch mail from inbox.
 public class mailReq{
 
     public String email;

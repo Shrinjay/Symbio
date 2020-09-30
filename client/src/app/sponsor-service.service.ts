@@ -5,6 +5,7 @@ import {Sponsor} from './Sponsor'
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
  
+//Service providing all API methods to access and update sponsors, get images and get mail.
 @Injectable({
   providedIn: 'root'
 })
@@ -13,12 +14,23 @@ export class SponsorService {
   
   constructor(private http: HttpClient) { }
 
+  //Get sponsors from API
   getSponsors(): Observable<Sponsor[]> {
     return this.http.get<Sponsor[]>('https://localhost:8080/api/sponsors')
   }
 
+  //Get pictures from google images API by proxying through app API.
   getPics(title): Observable<any> {
     return this.http.get(`https://localhost:8080/api/images?name=${title}`)
+  }
+
+  //Get mail from API, pass in email and password (currently from environment file)
+  getMail(key): Observable<any> {
+    return this.http.post('https://localhost:8080/api/mail', {
+      email: environment.user,
+      pass: environment.pass, 
+      keyword: key
+    })
   }
 
   addSponsor(sponsorName, contactName, contactEmail, status, image): any {
