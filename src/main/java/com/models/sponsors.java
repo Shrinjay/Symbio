@@ -38,10 +38,9 @@ public class sponsors {
     @Column(name="image", nullable=true, columnDefinition="text")
     private String image;
 
-    @Column(name="sponsoractions", nullable=true)
+    @Column(nullable=true)
     @OneToMany(targetEntity=actions.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("sponsor")
-    public List<actions> sponsoractions = new ArrayList<actions>();
+    private List<actions> sponsoractions = new ArrayList<actions>();
 
     public sponsors() {
 

@@ -18,20 +18,20 @@ export class NewActionComponent implements OnInit {
   constructor(private sponsorService: SponsorService,
     private formBuilder: FormBuilder ) { 
       this.newAction = this.formBuilder.group({
-          actionType: null,
-          actionDate: null, 
-          actionUser: null, 
-          actionDetails: null
+          _actionType: null,
+          _actionDate: null, 
+          _actionUser: null, 
+          _actionDetails: null
       })
     }
 
   onSubmit(data) {
     let actionData = {
       _id: this.selected,
-      actionType: data.actionType,
-      actionDate: data.actionDate,
-      actionUser: data.actionUser,
-      actionDetails: data.actionDetails
+      _actionType: data._actionType,
+      _actionDate: data._actionDate,
+      _actionUser: data._actionUser,
+      _actionDetails: data._actionDetails
       
     }
     this.sponsorService.addAction(actionData)

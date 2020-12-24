@@ -57,10 +57,10 @@ export class SponsorService {
   addAction(actionData): any {
     this.http.post<any>("https://localhost:8080/api/addAction", {
       _id: actionData._id,
-      _actiontype: actionData.actionType,
-      _actiondate: actionData.actionDate,
-      _actionuser: actionData.actionUser,
-      _actiondetails: actionData.actionDetails
+      _actiontype: actionData._actionType,
+      _actiondate: actionData._actionDate,
+      _actionuser: actionData._actionUser,
+      _actiondetails: actionData._actionDetails
     }).subscribe(data=>{return data})
   }
 
