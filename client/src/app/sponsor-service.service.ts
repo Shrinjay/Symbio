@@ -19,6 +19,10 @@ export class SponsorService {
     return this.http.get<Sponsor[]>('https://localhost:8080/api/sponsors', {params: params})
   }
 
+  getSponsorNum(params): Observable<Number> {
+    return this.http.get<Number>('https://localhost:8080/api/numsponsors', {params: params})
+  }
+
   //Get pictures from google images API by proxying through app API.
   getPics(title): Observable<any> {
     return this.http.get(`https://localhost:8080/api/images?name=${title}`)

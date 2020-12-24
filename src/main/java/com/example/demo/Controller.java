@@ -130,8 +130,16 @@ public class Controller {
     //Endpoint to get all sponsors
     @CrossOrigin
     @GetMapping("/api/sponsors") //Maps GET requests to the /greeting endpoint to the greeting() function
-    public List<sponsors> greeting(@RequestParam String _status) { 
-        return repository.findBystatus(_status);
+    public List<sponsors> greeting(@RequestParam(required=false) String _status) { 
+        
+        if (_status==null) return repository.findAll();
+        else return repository.findBystatus(_status);
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/numsponsors")
+    public Integer numSponsors(@RequestParam String _status) {
+        return repository.findBystatus(_status).size();
     }
 
     //Endpoint to add a new sponsor.
