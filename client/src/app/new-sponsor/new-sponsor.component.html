@@ -28,7 +28,12 @@
             </div>
             <div>
                 <label for="_status">Sponsor Status (Identified, Contacted, Negotiating, Established</label>
-                <input id="_status" class="form-control" type="text" formControlName="_status">
+                <select class="form-control" id="_status" formControlName="_status">
+                  <option>Identified</option>
+                  <option>Contacted</option>
+                  <option>Negotiating</option>
+                  <option>Established</option>
+                </select>
             </div>
             <div>
                 <label for="_image">Upload image:</label>
