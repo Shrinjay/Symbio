@@ -20,19 +20,24 @@ export class SponsorsComponent implements OnInit {
   
   //Get sponsors on load.
   ngOnInit(): void {
-    this.getHeroes()
+    this.getHeroes({_status: "established"})
   }
 
   //Handle click on "Add Action"
   onClick(event): void {
-    this.selected = event.target.id
+    this.selected = event.currentTarget.id
+  }
+
+  toggleActions(event): void {
+    this.sponsors.find(sponsor =>sponsor._id==event.currentTarget.id).expandActions = !(this.sponsors.find(sponsor => sponsor._id== event.currentTarget.id).expandActions)
+    
   }
 
   //Get sponsors
-  getHeroes(): void {
-      this.sponsorService.getSponsors().subscribe(sponsors => {
+  getHeroes(params): void {
+      this.sponsorService.getSponsors(params).subscribe(sponsors => {
+        sponsors.forEach(sponsor => sponsor.expandActions=false)
         this.sponsors=sponsors
-        console.log(sponsors)
         this.getPics()
       })
   }

@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.lang.StringBuilder;
 import java.util.Properties;
 import java.util.Date;
+import java.util.Collections;
 
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -129,8 +130,8 @@ public class Controller {
     //Endpoint to get all sponsors
     @CrossOrigin
     @GetMapping("/api/sponsors") //Maps GET requests to the /greeting endpoint to the greeting() function
-    public List<sponsors> greeting() { 
-        return repository.findAll();
+    public List<sponsors> greeting(@RequestParam String _status) { 
+        return repository.findBystatus(_status);
     }
 
     //Endpoint to add a new sponsor.

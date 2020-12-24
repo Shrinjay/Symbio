@@ -5,6 +5,7 @@ import com.models.actions;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,7 +81,7 @@ public class sponsors {
     public void set_status(String status) {this.status = status;}
 
     
-    public List<actions> get_actions() {return sponsoractions;}
+    public List<actions> get_actions() {Collections.reverse(sponsoractions); return sponsoractions;}
     public void set_actions(List<actions> sponsoractions) {this.sponsoractions = sponsoractions;}
 
    

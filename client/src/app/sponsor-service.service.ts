@@ -15,8 +15,8 @@ export class SponsorService {
   constructor(private http: HttpClient) { }
 
   //Get sponsors from API
-  getSponsors(): Observable<Sponsor[]> {
-    return this.http.get<Sponsor[]>('https://localhost:8080/api/sponsors')
+  getSponsors(params): Observable<Sponsor[]> {
+    return this.http.get<Sponsor[]>('https://localhost:8080/api/sponsors', {params: params})
   }
 
   //Get pictures from google images API by proxying through app API.

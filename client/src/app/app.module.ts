@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { NewSponsorComponent } from './new-sponsor/new-sponsor.component';
 import { NewActionComponent } from './new-action/new-action.component';
+import { StatsViewComponent } from './stats-view/stats-view.component';
+import { ProjectViewComponent } from './project-view/project-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SponsorsComponent,
     NewSponsorComponent,
-    NewActionComponent
+    NewActionComponent,
+    StatsViewComponent,
+    ProjectViewComponent
   ],
   imports: [
     BrowserModule,

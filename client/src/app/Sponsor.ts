@@ -6,5 +6,6 @@ export interface Sponsor {
    _contactemail: string,
     _status: string, 
     _sponsoractions: any,
-    _image: string
+    _image: string,
+    expandActions: boolean
 }

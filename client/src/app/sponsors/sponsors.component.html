@@ -5,29 +5,44 @@
     <div class="row">
         <div class='col-6' *ngFor='let sponsor of sponsors, index as i'>
            
-            <div class="card">
+            <div class="card" style="width: 25rem">
                 <div class='card-body'>
-                    <img src={{images[sponsor._sponsorname]}} style="max-width: 12rem">
-                    <h3 class='card-title'>{{sponsor._sponsorname}}</h3>
+                    <img src={{images[sponsor._sponsorname]}} style="max-width: 12rem; display: block; margin-left: auto; margin-right: auto;">
+                    <h3 class='card-title card-header'>{{sponsor._sponsorname}}</h3>
                     <div class='card-text'>
-                        <ul>
-                            <li>Contact Name: {{sponsor._contactname}}</li>
-                            <li>Contact Email: {{sponsor._contactemail}}</li>
+                    <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><b>Contact</b><br> {{sponsor._contactname}}</li>
+                            <li class="list-group-item" style="white-space: nowrap;"><b>Email</b><br> {{sponsor._contactemail}}</li>
+                       
+                        <li class="list-group-item"><h3>Recent Actions</h3>
+                        <ul class="list-group list-group-flush" *ngFor='let action of sponsor._actions|slice:0:1; let i = index'>
+                            <li class="list-group-item" style="text-align: center;"><b>{{action._actiondate}}</b></li>
+                            
+                                <li class="list-group-item"><b>Type: </b>{{action._actiontype}}</li>
+                                <li class="list-group-item"><b>User: </b>{{action._actionuser}}</li>
+                                <li class="list-group-item"><b>Details: </b>{{action._actiondetails}}</li>
                         </ul>
-                        <h3>Recent Actions</h3>
-                        <ul *ngFor='let action of sponsor._sponsoractions, let i = index'>
-                            <li><b>{{action._actiondate}}</b></li>
-                            <ul>
-                                <li><b>Type: </b>{{action._actiontype}}</li>
-                                <li><b>User: </b>{{action._actionuser}}</li>
-                                <li><b>Details: </b>{{action._actiondetails}}</li>
+                        <!--If user clicks expand list-->
+                        <div *ngIf="sponsor.expandActions">
+                            <ul class="list-group list-group-flush" *ngFor='let action of sponsor._actions|slice:1 ; let i = index'>
+                                <li class="list-group-item" style="text-align: center;"><b>{{action._actiondate}}</b></li>
+                                
+                                    <li class="list-group-item"><b>Type: </b>{{action._actiontype}}</li>
+                                    <li class="list-group-item"><b>User: </b>{{action._actionuser}}</li>
+                                    <li class="list-group-item"><b>Details: </b>{{action._actiondetails}}</li>
                             </ul>
-                        </ul>
-                        <ul *ngFor='let mail of emails[sponsor._sponsorname]'>
+                        </div>
+                        
+                    </li>   
+                    <button class="btn" style="background-color:rgb(128, 128, 128, 0.2)" (click)="toggleActions($event)" id="{{sponsor._id}}"><b>Show/Hide Actions</b></button>
+                   
+                    <ul class="list-group list-group-flush" *ngFor='let mail of emails[sponsor._sponsorname]'>
                             <li>{{mail}}</li>
                         </ul>
+                    </ul>
+                    <button class="btn btn-primary" (click)="onClick($event)" id="{{sponsor._id}}">Add Action</button>   
                     </div>
-                    <button class="btn btn-primary" (click)="onClick($event)" id="{{sponsor._id}}">Add Action</button>
+                    
                     
                 </div>
             </div>
