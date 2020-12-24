@@ -18,17 +18,17 @@ public class actions {
    
     @Id
     @GeneratedValue
-    public long _id;
+    private long _id;
   
 
     @Column(name="actiontype")
-    public String actiontype;
+    private String actiontype;
     @Column(name="actiondate")
-    public String actiondate;
+    private String actiondate;
     @Column(name="actionuser")
-    public String actionuser;
+    private String actionuser;
     @Column(name="actiondetails")
-    public String actiondetails;
+    private String actiondetails;
 
     public actions() {}
 

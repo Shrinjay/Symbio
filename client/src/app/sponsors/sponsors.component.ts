@@ -51,20 +51,20 @@ export class SponsorsComponent implements OnInit {
     
     this.sponsors.forEach(sponsor => {
       //If sponsor already has an image, add to images array for display
-      if (sponsor.image)
+      if (sponsor._image)
       {
-        this.images[sponsor.sponsorname] = sponsor.image
+        this.images[sponsor._sponsorname] = sponsor._image
       }
       //If sponsor doesn't have an image, get an image from the google images API, and save it to the sponsor's database entry.
       else {
-        this.sponsorService.getPics(sponsor.sponsorname).subscribe(res=>{
-          this.images[sponsor.sponsorname]=res['items'][0]['image']['thumbnailLink']
-          sponsor.image = res['items'][0]['image']['thumbnailLink']
+        this.sponsorService.getPics(sponsor._sponsorname).subscribe(res=>{
+          this.images[sponsor._sponsorname]=res['items'][0]['image']['thumbnailLink']
+          sponsor._image = res['items'][0]['image']['thumbnailLink']
           this.sponsorService.modifySponsor(sponsor)
        })
       }
       //Get emails after sponsor logos are loaded.
-      this.getMail(sponsor.sponsorname)
+      this.getMail(sponsor._sponsorname)
     
      })
 

@@ -25,18 +25,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class sponsors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long _id; //id field
+    private long _id; //id field
     //Fields
     @Column(name="sponsorname", nullable=true)
-    public String sponsorname;
+    private String sponsorname;
     @Column(name="contactname", nullable=true)
-    public String contactname;
+    private String contactname;
     @Column(name="contactemail", nullable=true)
-    public String contactemail;
+    private String contactemail;
     @Column(name="status", nullable=true)
-    public String status;
+    private String status;
     @Column(name="image", nullable=true, columnDefinition="text")
-    public String image;
+    private String image;
 
     @Column(name="sponsoractions", nullable=true)
     @OneToMany(targetEntity=actions.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -16,17 +16,17 @@ export class NewSponsorComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private sponsorService: SponsorService) { 
     this.newSponsor = this.formBuilder.group({
-      sponsorName: null, 
-      contactName: null,
-      contactEmail: null,
-      status: null,
-      image: null
+      _sponsorName: null, 
+      _contactName: null,
+      _contactEmail: null,
+      _status: null,
+      _image: null
     })
   }
 
   //Handle submission through sponsorService
   onSubmit(data) {
-    this.sponsorService.addSponsor(data.sponsorName, data.contactName, data.contactEmail, data.status, data.image)
+    this.sponsorService.addSponsor(data._sponsorName, data._contactName, data._contactEmail, data._status, data._image)
     .then(()=>{this.newSponsor.reset()
       window.location.reload(); })
   }

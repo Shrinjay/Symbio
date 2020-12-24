@@ -35,3 +35,6 @@ build/
 node_modules
 /src/main/resources/application.properties
 .env
+client/node_modules
+localhost.cert
+localhost.key

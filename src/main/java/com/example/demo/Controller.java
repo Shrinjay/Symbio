@@ -36,7 +36,7 @@ import java.util.Date;
 
 
 import io.github.cdimascio.dotenv.Dotenv;
-import jdk.javadoc.internal.doclets.formats.html.markup.BodyContents;
+//import jdk.javadoc.internal.doclets.formats.html.markup.BodyContents;
 import jdk.tools.jlink.internal.plugins.ExcludePlugin;
 
 import  org.json.JSONObject;
@@ -62,7 +62,9 @@ import org.jsoup.Jsoup;
 
 
 
-
+//PULL OUT JAVAMAIL AND GOOGLE IMAGES API CODE TO OBEY DEPENDENCY INVERSION, RATHER THAN HAVING IT DIRECTLY LINKED TO
+//THE GOOGLE IMAGES OR JAVAMAIL API, USE A FUNCTION TO ISOLATE HIGH-LEVEL CODE FROM API CALLS.
+@CrossOrigin
 @RestController //RestController sets this up as a controller for a REST API
 public class Controller { 
 
@@ -146,7 +148,7 @@ public class Controller {
     @PutMapping("/api/modify")
     public sponsors modifySponsors(@RequestBody sponsors newSponsor)
     {   
-        newSponsor.set_id(newSponsor._id);
+        newSponsor.set_id(newSponsor.get_id());
         repository.save(newSponsor);
         return newSponsor;
             
@@ -157,11 +159,11 @@ public class Controller {
     @PostMapping("/api/addAction")
     public sponsors newAction(@RequestBody actions newAction)
     {
-        sponsors sponsor = repository.findBy_id(newAction._id);
+        sponsors sponsor = repository.findBy_id(newAction.get_id());
         
         List<actions> existingActions = new ArrayList<actions>();
         if (sponsor.get_actions()!=null) existingActions = sponsor.get_actions();
-        existingActions.add(new actions(new AtomicLong().longValue(), newAction.actiontype, newAction.actiondate, newAction.actionuser, newAction.actiondetails));
+        existingActions.add(new actions(new AtomicLong().longValue(), newAction.get_actiontype(), newAction.get_actiondate(), newAction.get_actionuser(), newAction.get_actiondetails()));
         sponsor.set_actions(existingActions);
         repository.saveAndFlush(sponsor);
         return sponsor;
@@ -173,7 +175,7 @@ public class Controller {
     public String getImages(@RequestParam String name) 
     {
         
-        
+        //PULL THIS INTO ITS OWN FUNCTION
         StringBuilder req = new StringBuilder("https://www.googleapis.com/customsearch/v1?");
         req.append("key=");
         req.append(dotenv.get("API_KEY"));
@@ -182,14 +184,14 @@ public class Controller {
         req.append("&q=");
         req.append(encoder(name));
         req.append("&searchType=image&alt=json");
-
         String finalReq = req.toString();
 
+        //ALSO PULL THIS INTO ITS OWN FUNCTION
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(finalReq))
             .build();
-
+        //PUT API CALLS TO IMAGE API INTO ITS OWN FUNCTION/INTERFACE WHATEVER
            try {
             HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
             return response.body();
@@ -207,6 +209,7 @@ public class Controller {
 
         
         System.out.println("searching...");
+        //PUT THIS INTO ITS OWN FUNCTION AS INIT MAILPROPS, PASS IN STUFF INSTEAD. 
         Properties mailProps = new Properties();
 
         mailProps.put("mail.imap.host", "imap.gmail.com");
@@ -216,17 +219,18 @@ public class Controller {
         mailProps.setProperty("mail.imap.socketFactory.fallback", "false");
         mailProps.setProperty("mail.imap.socketFactory.port", String.valueOf("993"));
 
+        //ABSTRACT THIS OUT INTO A CLASS THAT ALLOWS YOU TO SEARCH AN INBOX WITH ANY API
         Session session = Session.getDefaultInstance(mailProps);
         HashMap<Date, String> res = new HashMap<Date, String>();
 
         try {
             Store store = session.getStore("imap");
-            store.connect(req.email, req.pass);
+            store.connect(req.get_email(), req.get_pass());
     
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_ONLY);
             
-            SearchTerm condition = new SubjectTerm(req.keyword);
+            SearchTerm condition = new SubjectTerm(req.get_keyword());
 
             Message[] found = inbox.search(condition);
             
@@ -234,10 +238,8 @@ public class Controller {
             for(int i=0; i<found.length; i++)
             {
                 Message message = found[i];
-                String body = getText(message).substring(0, 300);
-
+                String body = getText(message);
                 res.put(message.getReceivedDate(), body);
-                
             }
             
  

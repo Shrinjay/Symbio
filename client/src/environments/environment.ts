@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  user: null,
-  pass: null
+  user: "shrinjay.mukherjee@stemfellowship.org",
+  pass: "Sunny2002+"
 };
 
 /*

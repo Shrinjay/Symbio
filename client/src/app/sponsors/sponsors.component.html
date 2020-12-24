@@ -7,23 +7,23 @@
            
             <div class="card">
                 <div class='card-body'>
-                    <img src={{images[sponsor.sponsorname]}} style="max-width: 12rem">
-                    <h3 class='card-title'>{{sponsor.sponsorname}}</h3>
+                    <img src={{images[sponsor._sponsorname]}} style="max-width: 12rem">
+                    <h3 class='card-title'>{{sponsor._sponsorname}}</h3>
                     <div class='card-text'>
                         <ul>
-                            <li>Contact Name: {{sponsor.contactname}}</li>
-                            <li>Contact Email: {{sponsor.contactemail}}</li>
+                            <li>Contact Name: {{sponsor._contactname}}</li>
+                            <li>Contact Email: {{sponsor._contactemail}}</li>
                         </ul>
                         <h3>Recent Actions</h3>
-                        <ul *ngFor='let action of sponsor.sponsoractions, let i = index'>
-                            <li><b>{{action.actiondate}}</b></li>
+                        <ul *ngFor='let action of sponsor._sponsoractions, let i = index'>
+                            <li><b>{{action._actiondate}}</b></li>
                             <ul>
-                                <li><b>Type: </b>{{action.actiontype}}</li>
-                                <li><b>User: </b>{{action.actionuser}}</li>
-                                <li><b>Details: </b>{{action.actiondetails}}</li>
+                                <li><b>Type: </b>{{action._actiontype}}</li>
+                                <li><b>User: </b>{{action._actionuser}}</li>
+                                <li><b>Details: </b>{{action._actiondetails}}</li>
                             </ul>
                         </ul>
-                        <ul *ngFor='let mail of emails[sponsor.sponsorname]'>
+                        <ul *ngFor='let mail of emails[sponsor._sponsorname]'>
                             <li>{{mail}}</li>
                         </ul>
                     </div>
