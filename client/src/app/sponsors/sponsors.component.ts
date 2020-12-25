@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SponsorService} from '../sponsor-service.service';
 import {Sponsor} from '../Sponsor';
 import {DomSanitizer} from '@angular/platform-browser'
+import { HttpParams } from '@angular/common/http';
 
 //Handle sponsor display and input to update sponsor actions.
 @Component({
@@ -14,13 +15,13 @@ export class SponsorsComponent implements OnInit {
   images: Object = {}
   selected: string
   emails: Object={}
-
+  
   constructor(private sponsorService: SponsorService,
     private sanitizer: DomSanitizer) { }
   
   //Get sponsors on load.
   ngOnInit(): void {
-    this.getHeroes({_status: "established"})
+    this.getHeroes({_status: "Established"})
   }
 
   //Handle click on "Add Action"

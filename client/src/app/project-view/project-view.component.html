@@ -1,1 +1,16 @@
-<p>project-view works!</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Organization</th>
+            <th scope="col">Status</th>
+            <th scope="col">Recent Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let project of projects, index as i">
+            <td>{{project._sponsorname}}</td>
+            <td>{{project._status}}</td>
+            <td>{{project._actions[0]}}</td>
+        </tr>
+    </tbody>
+</table>    

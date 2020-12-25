@@ -18,10 +18,10 @@ export class StatsViewComponent implements OnInit {
     private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-     this.sponsorService.getSponsorNum({_status: "established"}).subscribe(established => this.established = established)
-      this.sponsorService.getSponsorNum({_status: "negotiating"}).subscribe(negotiating => this.negotiating = negotiating)
-      this.sponsorService.getSponsorNum({_status: "contacted"}).subscribe(contacted => this.contacted=contacted)
-      this.sponsorService.getSponsorNum({_status: "identified"}).subscribe(identified=>this.identified=identified)
+     this.sponsorService.getSponsorNum({_status: "Established"}).subscribe(established => this.established = established)
+      this.sponsorService.getSponsorNum({_status: "Negotiating"}).subscribe(negotiating => this.negotiating = negotiating)
+      this.sponsorService.getSponsorNum({_status: "Contacted"}).subscribe(contacted => this.contacted=contacted)
+      this.sponsorService.getSponsorNum({_status: "Identified"}).subscribe(identified=>this.identified=identified)
       this.generateCards()
   }
 
