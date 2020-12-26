@@ -1,7 +1,21 @@
 <!--Root HTML for the application, containing the router outlet and the main sponsor display-->
 <h1>Partnr</h1>
-<app-stats-view></app-stats-view>
-<app-project-view></app-project-view>
-<app-sponsors></app-sponsors>
+<div class="container-fluid">
+    <div class="row m-4">
+        <div class="col-sm-12">
+            <app-stats-view></app-stats-view>
+        </div>
+    </div>
+    <div class="row m-4">
+       <div class="col-sm-12">
+        <app-project-view></app-project-view>
+       </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-sm-12">
+            <app-sponsors></app-sponsors>
+        </div>
+    </div>
+</div>
 
 <router-outlet></router-outlet>

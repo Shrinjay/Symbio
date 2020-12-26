@@ -11,6 +11,11 @@ export class ProjectViewComponent implements OnInit {
   constructor(private sponsorService: SponsorService) { }
 
   projects: Sponsor[]
+  statusLookup: Object = {
+    'Identified': 25, 
+    'Contacted': 50, 
+    'Negotiating': 75
+  }
 
   ngOnInit(): void {
   this.getProjects({_status: ["Negotiating", "Contacted", "Identified"]})
@@ -20,5 +25,6 @@ export class ProjectViewComponent implements OnInit {
   {
     this.sponsorService.getSponsors(params).subscribe(projects => this.projects=projects)
   }
+  
 
 }
