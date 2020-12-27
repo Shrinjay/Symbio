@@ -1,54 +1,60 @@
 <!--HTML component to display list of sponsors-->
-<h2>Sponsors</h2>
-
-<div class="container">
-    <div class="row">
-        <div class='col-6' *ngFor='let sponsor of sponsors, index as i'>
-           
-            <div class="card" style="width: 25rem">
-                <div class='card-body'>
-                    <img src={{images[sponsor._sponsorname]}} style="max-width: 12rem; display: block; margin-left: auto; margin-right: auto;">
-                    <h3 class='card-title card-header'>{{sponsor._sponsorname}}</h3>
-                    <div class='card-text'>
-                    <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><b>Contact</b><br> {{sponsor._contactname}}</li>
-                            <li class="list-group-item" style="white-space: nowrap;"><b>Email</b><br> {{sponsor._contactemail}}</li>
-                       
-                        <li class="list-group-item"><h3>Recent Actions</h3>
-                        <ul class="list-group list-group-flush" *ngFor='let action of sponsor._actions|slice:0:1; let i = index'>
-                            <li class="list-group-item" ><b>On {{action._actiondate}}</b></li>
-                            
-                                <li class="list-group-item"><b>Type</b><br>{{action._actiontype}}</li>
-                                <li class="list-group-item"><b>User</b><br>{{action._actionuser}}</li>
-                                <li class="list-group-item"><b>Details</b><br>{{action._actiondetails}}</li>
-                        </ul>
-                        <!--If user clicks expand list-->
-                        <div *ngIf="sponsor.expandActions">
-                            <ul class="list-group list-group-flush" *ngFor='let action of sponsor._actions|slice:1 ; let i = index'>
-                                <li class="list-group-item"><b>On {{action._actiondate}}</b></li>
+<div class="container-fluid">
+    <div class="row p-2 justify-content-center" id="header" style="display: block;">
+        <b>Sponsors</b>
+        <div>
+            <app-new-sponsor></app-new-sponsor>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class='col-6' *ngFor='let sponsor of sponsors, index as i'>
+               
+                <div class="card" style="width: 25rem">
+                    <h3 class='card-title card-header'><b>{{sponsor._sponsorname}}</b></h3>
+                    <div class='card-body'>
+                        <img src={{images[sponsor._sponsorname]}} style="max-width: 12rem; display: block; margin-left: auto; margin-right: auto;">
+                        
+                        <div class='card-text'>
+                        <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Contact</b><br> {{sponsor._contactname}}</li>
+                                <li class="list-group-item" style="white-space: nowrap;"><b>Email</b><br> {{sponsor._contactemail}}</li>
+                           
+                            <li class="list-group-item"><h3>Recent Actions</h3>
+                            <ul class="list-group list-group-flush" *ngFor='let action of sponsor._actions|slice:0:1; let i = index'>
+                                <li class="list-group-item" ><b>On {{action._actiondate}}</b></li>
                                 
                                     <li class="list-group-item"><b>Type</b><br>{{action._actiontype}}</li>
                                     <li class="list-group-item"><b>User</b><br>{{action._actionuser}}</li>
                                     <li class="list-group-item"><b>Details</b><br>{{action._actiondetails}}</li>
                             </ul>
+                            <!--If user clicks expand list-->
+                            <div *ngIf="sponsor.expandActions">
+                                <ul class="list-group list-group-flush" *ngFor='let action of sponsor._actions|slice:1 ; let i = index'>
+                                    <li class="list-group-item"><b>On {{action._actiondate}}</b></li>
+                                    
+                                        <li class="list-group-item"><b>Type</b><br>{{action._actiontype}}</li>
+                                        <li class="list-group-item"><b>User</b><br>{{action._actionuser}}</li>
+                                        <li class="list-group-item"><b>Details</b><br>{{action._actiondetails}}</li>
+                                </ul>
+                            </div>
+                            
+                        </li>   
+                        <button class="btn" style="background-color:rgb(128, 128, 128, 0.2)" (click)="toggleActions($event)" id="{{sponsor._id}}"><b>Show/Hide Actions</b></button>
+                        <button class="btn btn-success" (click)="onClick($event)" id="{{sponsor._id}}">Add Action</button>  
+                        <ul class="list-group list-group-flush" *ngFor='let mail of emails[sponsor._sponsorname]'>
+                                <li>{{mail}}</li>
+                            </ul>
+                        </ul>
+                         
                         </div>
                         
-                    </li>   
-                    <button class="btn" style="background-color:rgb(128, 128, 128, 0.2)" (click)="toggleActions($event)" id="{{sponsor._id}}"><b>Show/Hide Actions</b></button>
-                   
-                    <ul class="list-group list-group-flush" *ngFor='let mail of emails[sponsor._sponsorname]'>
-                            <li>{{mail}}</li>
-                        </ul>
-                    </ul>
-                    <button class="btn btn-primary" (click)="onClick($event)" id="{{sponsor._id}}">Add Action</button>   
+                        
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<app-new-sponsor></app-new-sponsor>
 <app-new-action *ngIf="selected" [selected]="selected"></app-new-action>

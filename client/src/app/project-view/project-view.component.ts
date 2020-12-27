@@ -12,9 +12,9 @@ export class ProjectViewComponent implements OnInit {
 
   projects: Sponsor[]
   statusLookup: Object = {
-    'Identified': 25, 
-    'Contacted': 50, 
-    'Negotiating': 75
+    'Identified': 'badge-danger', 
+    'Contacted': 'badge-warning', 
+    'Negotiating': 'badge-success'
   }
 
   ngOnInit(): void {
