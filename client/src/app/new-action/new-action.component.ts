@@ -1,6 +1,7 @@
 import {FormBuilder} from '@angular/forms'
 import { Component, OnInit, Input } from '@angular/core';
 import {SponsorService} from '../sponsor-service.service';
+import {GlobalToggleService} from '../global-toggle.service'
 declare var $: any;
 
 //Handle form input and API request for adding new actions
@@ -16,7 +17,7 @@ export class NewActionComponent implements OnInit {
   newAction
 
   constructor(private sponsorService: SponsorService,
-    private formBuilder: FormBuilder ) { 
+    private formBuilder: FormBuilder, private toggleService:  GlobalToggleService) { 
       this.newAction = this.formBuilder.group({
           _actionType: null,
           _actionDate: null, 
@@ -44,6 +45,11 @@ export class NewActionComponent implements OnInit {
   
   ngOnChanges() {
     $('#actionModal').modal('show');
+  }
+
+  closeModal()
+  {
+    this.toggleService.updateSelected("")
   }
 
 }

@@ -21,7 +21,8 @@
                         <td>
                             <button class="btn btn-success" id="{{project._id}}" (click)="onClick($event)"><b>New Action</b></button>
                             <button class="btn btn-primary"
-                             *ngFor="let action of project._actions" id="{{action._id}}">{{action._actiondate}}</button>
+                             *ngFor="let action of project._actions" (click)="onSelect(action)"
+                              id="{{action._id}}">{{action._actiondate}}</button>
                         </td>
                     </tr>
                 </tbody>
@@ -29,3 +30,5 @@
         
     </div>
 </div>  
+
+<app-action-details *ngIf="selectedAction" [action]="selectedAction"></app-action-details>

@@ -10,6 +10,7 @@ import { NewSponsorComponent } from './new-sponsor/new-sponsor.component';
 import { NewActionComponent } from './new-action/new-action.component';
 import { StatsViewComponent } from './stats-view/stats-view.component';
 import { ProjectViewComponent } from './project-view/project-view.component';
+import { ActionDetailsComponent } from './action-details/action-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProjectViewComponent } from './project-view/project-view.component';
     NewSponsorComponent,
     NewActionComponent,
     StatsViewComponent,
-    ProjectViewComponent
+    ProjectViewComponent,
+    ActionDetailsComponent
   ],
   imports: [
     BrowserModule,

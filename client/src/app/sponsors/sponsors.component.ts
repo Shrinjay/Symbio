@@ -15,7 +15,10 @@ import { Subscription } from 'rxjs';
 export class SponsorsComponent implements OnInit {
   sponsors: Sponsor[]
   images: Object = {}
-  selected: any = this.toggleService.selected_new_action.subscribe(selected=> this.selected = selected)
+  selected: any = this.toggleService.selected_new_action.subscribe(selected=> {
+    this.selected = selected
+    console.log(this.selected)
+  })
   emails: Object={}
   
   constructor(private sponsorService: SponsorService,
