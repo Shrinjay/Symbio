@@ -3,6 +3,8 @@ import {SponsorService} from '../sponsor-service.service';
 import {Sponsor} from '../Sponsor';
 import {DomSanitizer} from '@angular/platform-browser'
 import { HttpParams } from '@angular/common/http';
+import {GlobalToggleService} from '../global-toggle.service';
+import { Subscription } from 'rxjs';
 
 //Handle sponsor display and input to update sponsor actions.
 @Component({
@@ -13,20 +15,22 @@ import { HttpParams } from '@angular/common/http';
 export class SponsorsComponent implements OnInit {
   sponsors: Sponsor[]
   images: Object = {}
-  selected: string
+  selected: any = this.toggleService.selected_new_action.subscribe(selected=> this.selected = selected)
   emails: Object={}
   
   constructor(private sponsorService: SponsorService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer, private toggleService: GlobalToggleService) { }
   
   //Get sponsors on load.
   ngOnInit(): void {
     this.getHeroes({_status: "Established"})
+    this.toggleService.updateSelected("")
   }
 
   //Handle click on "Add Action"
   onClick(event): void {
-    this.selected = event.currentTarget.id
+    this.toggleService.updateSelected(event.target.id)
+    console.log(this.selected)
   }
 
   toggleActions(event): void {

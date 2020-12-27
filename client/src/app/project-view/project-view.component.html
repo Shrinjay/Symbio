@@ -18,7 +18,11 @@
                         <td>
                             <span class="badge" [ngClass]="statusLookup[project._status]"> {{project._status}}</span>
                         </td>
-                        <td>{{project._actions[0]}}</td>
+                        <td>
+                            <button class="btn btn-success" id="{{project._id}}" (click)="onClick($event)"><b>New Action</b></button>
+                            <button class="btn btn-primary"
+                             *ngFor="let action of project._actions" id="{{action._id}}">{{action._actiondate}}</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
