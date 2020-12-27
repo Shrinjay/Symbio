@@ -189,8 +189,10 @@ public class Controller {
     @CrossOrigin
     @GetMapping("/api/images")
     public String getImages(@RequestParam String name) 
-    {
-        
+    {   
+        StringBuilder nameReq = new StringBuilder(name);
+        nameReq.append("logo");
+        System.out.println(nameReq.toString());
         //PULL THIS INTO ITS OWN FUNCTION
         StringBuilder req = new StringBuilder("https://www.googleapis.com/customsearch/v1?");
         req.append("key=");
@@ -198,7 +200,7 @@ public class Controller {
         req.append("&cx=");
         req.append(dotenv.get("CX_KEY"));
         req.append("&q=");
-        req.append(encoder(name));
+        req.append(encoder(nameReq.toString()));
         req.append("&searchType=image&alt=json");
         String finalReq = req.toString();
 
