@@ -191,7 +191,7 @@ public class Controller {
     public String getImages(@RequestParam String name) 
     {   
         StringBuilder nameReq = new StringBuilder(name);
-        nameReq.append("logo");
+        nameReq.append(" logo");
         System.out.println(nameReq.toString());
         //PULL THIS INTO ITS OWN FUNCTION
         StringBuilder req = new StringBuilder("https://www.googleapis.com/customsearch/v1?");
