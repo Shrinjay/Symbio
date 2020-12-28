@@ -9,12 +9,16 @@
         </div>
        
         <div class="modal-body">
-          
-              
-         Test
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Date</b><br> {{action._actiondate}}</li>
+                <li class="list-group-item"><b>Type</b><br>{{action._actiontype}}</li>
+                <li class="list-group-item"><b>User</b><br>{{action._actionuser}}</li>
+                <li class="list-group-item"><b>Details</b><br>{{action._actiondetails}}</li>
+        </ul>
+         
         </div>
         <div class="modal-footer">
-          Test
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()" >Close</button>
         </div>
    
       </div>

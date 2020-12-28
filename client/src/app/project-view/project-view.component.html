@@ -1,6 +1,6 @@
 <div class="container-fluid" style="font-size: 1.2vw;">
     <div class="row p-2 justify-content-center" id="header" style="display: block;">
-        <b>In Progress</b>
+        <b>Partnerships In Progress</b>
     </div>
     <div class="row" style="display: block;">
 
@@ -21,7 +21,7 @@
                         <td>
                             <button class="btn btn-success" id="{{project._id}}" (click)="onClick($event)"><b>New Action</b></button>
                             <button class="btn btn-primary"
-                             *ngFor="let action of project._actions" (click)="onSelect(action)"
+                             *ngFor="let action of project._actions|slice:0:4" (click)="onSelect(action)"
                               id="{{action._id}}">{{action._actiondate}}</button>
                         </td>
                     </tr>
