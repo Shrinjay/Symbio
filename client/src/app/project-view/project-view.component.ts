@@ -22,7 +22,7 @@ export class ProjectViewComponent implements OnInit {
 
   ngOnInit(): void {
   this.getProjects({_status: ["Negotiating", "Contacted", "Identified"]})
-  this.toggleService.updateDetails("")
+  this.toggleService.updateDetails(false)
   }
 
   getProjects(params)
@@ -38,6 +38,7 @@ export class ProjectViewComponent implements OnInit {
   onSelect(action)
   {
     this.toggleService.updateDetails(action)
+  
    
   }
   

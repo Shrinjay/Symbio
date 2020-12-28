@@ -8,7 +8,7 @@ declare var $: any;
 })
 export class ActionDetailsComponent implements OnInit {
 
-  @Input() action: Object = this.toggleService.selected_action_details.subscribe(action => this.action = action)
+  @Input() action: Object = {}
  
   constructor(private toggleService: GlobalToggleService) { }
 

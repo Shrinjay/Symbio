@@ -9,6 +9,7 @@ export class GlobalToggleService {
   public selected_new_action = new Subject<string>()
   public selected_action_details = new Subject<string>()
 
+
   updateSelected(newSelected)
   {
     this.selected_new_action.next(newSelected)
