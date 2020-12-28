@@ -7,10 +7,16 @@ import {Subject} from 'rxjs';
 export class GlobalToggleService {
 
   public selected_new_action = new Subject<string>()
+  public selected_action_details = new Subject<string>()
 
   updateSelected(newSelected)
   {
     this.selected_new_action.next(newSelected)
+  }
+
+  updateDetails(newDetails)
+  {
+    this.selected_action_details.next(newDetails)
   }
 
   

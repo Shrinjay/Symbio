@@ -18,10 +18,11 @@ export class ProjectViewComponent implements OnInit {
     'Contacted': 'badge-warning', 
     'Negotiating': 'badge-success'
   }
-  selectedAction: Object
+  selectedAction: Object = this.toggleService.selected_action_details.subscribe(action => this.selectedAction = action)
 
   ngOnInit(): void {
   this.getProjects({_status: ["Negotiating", "Contacted", "Identified"]})
+  this.toggleService.updateDetails("")
   }
 
   getProjects(params)
@@ -36,8 +37,8 @@ export class ProjectViewComponent implements OnInit {
 
   onSelect(action)
   {
-    this.selectedAction = action
-    console.log((this.selectedAction)?true:false)
+    this.toggleService.updateDetails(action)
+   
   }
   
 

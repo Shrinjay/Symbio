@@ -32,7 +32,7 @@ export class SponsorsComponent implements OnInit {
 
   //Handle click on "Add Action"
   onClick(event): void {
-    this.toggleService.updateSelected(event.target.id)
+    this.toggleService.updateSelected(event.currentTarget.id)
     console.log(this.selected)
   }
 

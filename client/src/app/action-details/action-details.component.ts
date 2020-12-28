@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {GlobalToggleService} from '../global-toggle.service'
 declare var $: any;
 @Component({
   selector: 'app-action-details',
@@ -7,9 +8,9 @@ declare var $: any;
 })
 export class ActionDetailsComponent implements OnInit {
 
-  @Input() action: Object
+  @Input() action: Object = this.toggleService.selected_action_details.subscribe(action => this.action = action)
  
-  constructor() { }
+  constructor(private toggleService: GlobalToggleService) { }
 
   ngOnInit(): void {
     console.log("running: ")
@@ -21,7 +22,7 @@ export class ActionDetailsComponent implements OnInit {
   }
 
   closeModal() {
-    this.action={}
+    this.toggleService.updateDetails("")
   }
 
 }
