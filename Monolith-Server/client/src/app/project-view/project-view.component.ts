@@ -38,8 +38,6 @@ export class ProjectViewComponent implements OnInit {
   onSelect(action)
   {
     this.toggleService.updateDetails(action)
-  
-   
   }
   
 
