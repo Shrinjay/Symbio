@@ -1,7 +1,7 @@
-package com.models;
+package com.symbio.sponsorService.models;
 
 
-import com.models.actions;
+import com.symbio.sponsorService.models.actions;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -1,0 +1,20 @@
+thead {
+    background-color: #f8f9fa;
+}
+
+#header {
+    font-size: 2vw;
+}
+
+.badge {
+    padding: 0.7rem;
+    font-size: 1rem;
+    margin: 0.25vw;
+}
+
+.btn {
+    margin: 0.25vw;
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 8vw
+}

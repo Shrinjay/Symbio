@@ -1,0 +1,46 @@
+<!--HTML Modal to add new actions-->
+<div class="modal show" data-backdrop="static" data-keyboard="false" modal-backdrop id="actionModal" tabindex="-1" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add a new action</h5>
+          <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="newAction" (ngSubmit)="onSubmit(newAction.value)">
+        <div class="modal-body">
+          
+              <div>
+                  <label for="_actionType">What Happened?</label>
+                  <select class="form-control" id="_actionType" formControlName="_actionType">
+                      <option>First Contact</option>
+                      <option>Follow Up</option>
+                      <option>Discussion</option>
+                      <option>Proposal</option>
+                      <option>Finalization</option>
+                  </select>
+              </div>
+              <div>
+                  <label for="_actionDate">When did this happen?</label>
+                  <input id="_actionDate" type="text" class="form-control" formControlName="_actionDate">
+              </div>
+              <div>
+                  <label for="_actionUser">Who did this?</label>
+                  <input id="_actionUser" type="text" class="form-control" formControlName="_actionUser">
+              </div>
+              <div>
+                  <label for="_actionDetails">Additional Details?</label>
+                  <textarea id="_actionDetails" class="form-control" formControlName="_actionDetails" rows="2"></textarea>
+              </div>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()" >Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+

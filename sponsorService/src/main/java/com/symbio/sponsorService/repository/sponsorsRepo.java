@@ -1,6 +1,6 @@
-package com.repository;
+package com.symbio.sponsorService.repository;
 
-import com.models.sponsors;
+import com.symbio.sponsorService.models.sponsors;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

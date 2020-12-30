@@ -1,4 +1,4 @@
-package com;
+package com.symbio.sponsorService;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-import com.models.sponsors;
-import com.repository.sponsorsRepo;
-import com.models.actions;
-import com.models.mailReq;
+import com.symbio.sponsorService.models.sponsors;
+import com.symbio.sponsorService.repository.sponsorsRepo;
+import com.symbio.sponsorService.models.actions;
+import com.symbio.sponsorService.models.mailReq;
 
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -28,8 +29,9 @@ import  org.json.JSONObject;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-
+@CrossOrigin
 @RestController
+@SpringBootApplication
 public class sponsorController {
 
  //Load dotenv to access .env file
@@ -40,7 +42,7 @@ public class sponsorController {
  
  //Endpoint to get all sponsors
  @CrossOrigin
- @GetMapping("/api/sponsors") //Maps GET requests to the /greeting endpoint to the greeting() function
+ @GetMapping("/")//Maps GET requests to the /greeting endpoint to the greeting() function
  public List<sponsors> greeting(@RequestParam(name="_status", required=false) String[] _status) { 
      
      if (_status==null) return repository.findAll();
@@ -55,14 +57,14 @@ public class sponsorController {
  }
 
  @CrossOrigin
- @GetMapping("/api/numsponsors")
+ @GetMapping("/numsponsors/")
  public Integer numSponsors(@RequestParam String _status) {
      return repository.findBystatus(_status).size();
  }
 
  //Endpoint to add a new sponsor.
  @CrossOrigin
- @PostMapping("/api/add")
+ @PostMapping("/add/")
  public sponsors addSponsor(@RequestBody sponsors newSponsor)
  {
     
@@ -72,7 +74,7 @@ public class sponsorController {
 
  //Endpoint to modify a sponsor.
  @CrossOrigin
- @PutMapping("/api/modify")
+ @PutMapping("/modify/")
  public sponsors modifySponsors(@RequestBody sponsors newSponsor)
  {   
      newSponsor.set_id(newSponsor.get_id());
@@ -83,7 +85,7 @@ public class sponsorController {
 
  //Endpoint to add an action to a sponsor
  @CrossOrigin
- @PostMapping("/api/addAction")
+ @PostMapping("/addAction/")
  public sponsors newAction(@RequestBody actions newAction)
  {
      sponsors sponsor = repository.findBy_id(newAction.get_id());

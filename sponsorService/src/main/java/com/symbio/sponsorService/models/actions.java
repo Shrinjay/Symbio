@@ -1,9 +1,9 @@
-package com.models;
+package com.symbio.sponsorService.models;
 
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import com.models.sponsors;
+import com.symbio.sponsorService.models.sponsors;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Column;

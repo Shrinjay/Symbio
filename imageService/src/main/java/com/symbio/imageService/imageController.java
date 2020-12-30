@@ -60,7 +60,7 @@ import org.jsoup.Jsoup;
 public class imageController {
     //Endpoint to get an image from the google images AP.
 @CrossOrigin
-@GetMapping("/api/images")
+@GetMapping("/")
 public String getImages(@RequestParam String name) 
 {   
     StringBuilder nameReq = new StringBuilder(name);
