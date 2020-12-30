@@ -47,3 +47,5 @@ Thumbs.db
 
 localhost.cert
 localhost.key
+
+environment.ts
