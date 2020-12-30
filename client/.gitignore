@@ -48,4 +48,4 @@ Thumbs.db
 localhost.cert
 localhost.key
 
-/src/environment/environments/
+/src/environments/
