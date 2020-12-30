@@ -1,4 +1,4 @@
-package com;
+package com.symbio.mailService;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 
-import com.models.mailReq;
+import com.symbio.mailService.models.mailReq;
 
 import java.util.List;
 import java.net.URI;
@@ -33,10 +33,6 @@ import java.util.Properties;
 import java.util.Date;
 import java.util.Collections;
 
-
-import io.github.cdimascio.dotenv.Dotenv;
-//import jdk.javadoc.internal.doclets.formats.html.markup.BodyContents;
-import jdk.tools.jlink.internal.plugins.ExcludePlugin;
 
 import  org.json.JSONObject;
 
@@ -117,7 +113,7 @@ public class mailController {
  
     //Endpoint to get email from user's inbox. 
     @CrossOrigin
-    @PostMapping("/api/mail")
+    @PostMapping("/")
     public HashMap<Date, String> getMail(@RequestBody mailReq req) {
 
         

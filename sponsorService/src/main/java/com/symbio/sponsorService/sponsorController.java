@@ -34,8 +34,7 @@ import java.nio.charset.StandardCharsets;
 @SpringBootApplication
 public class sponsorController {
 
- //Load dotenv to access .env file
- Dotenv dotenv = Dotenv.load();
+ 
  //Inject sponsors repository
  @Autowired 
  private sponsorsRepo repository;

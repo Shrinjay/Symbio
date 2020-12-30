@@ -1,4 +1,4 @@
-package com.models;
+package com.symbio.mailService.models;
 
 //Java object defining fields for a request from the front end to fetch mail from inbox.
 public class mailReq{

@@ -1,4 +1,4 @@
-package com;
+package com.symbio.imageService;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -33,31 +33,27 @@ import java.util.Collections;
 
 
 import io.github.cdimascio.dotenv.Dotenv;
-//import jdk.javadoc.internal.doclets.formats.html.markup.BodyContents;
-import jdk.tools.jlink.internal.plugins.ExcludePlugin;
-
-import  org.json.JSONObject;
-
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
- 
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.BodyPart;
-import javax.mail.Part;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.search.SearchTerm;
-import javax.mail.search.SubjectTerm;
-import java.io.IOException;
 
-import org.jsoup.Jsoup;
 
 @RestController
 public class imageController {
+
+     //Function used to encode URL strings
+ private static String encoder(String toEncode) {
+    try {
+        return URLEncoder.encode(toEncode, StandardCharsets.UTF_8.toString());
+    }
+    catch(Exception e)
+    {
+        return "Fail";
+    }
+}
+
+    //Load dotenv to access .env file
+ Dotenv dotenv = Dotenv.load();
+
     //Endpoint to get an image from the google images AP.
 @CrossOrigin
 @GetMapping("/")
