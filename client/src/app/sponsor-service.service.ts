@@ -25,12 +25,12 @@ export class SponsorService {
 
   //Get pictures from google images API by proxying through app API.
   getPics(title): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/images?name=${title}`)
+    return this.http.get(`http://localhost:8080/api/images?name=${title}/`)
   }
 
   //Get mail from API, pass in email and password (currently from environment file)
   getMail(key): Observable<any> {
-    return this.http.post('http://localhost:8080/api/mail', {
+    return this.http.post('http://localhost:8080/api/mail/', {
       email: environment.user,
       pass: environment.pass, 
       keyword: key
@@ -38,7 +38,7 @@ export class SponsorService {
   }
 
   addSponsor(sponsorName, contactName, contactEmail, status, image): any {
-    this.http.post<any>('http://localhost:8080/api/sponsors/add', {
+    this.http.post<any>('http://localhost:8080/api/sponsors/add/', {
         _sponsorname: sponsorName,
         _contactname: contactName,
         _contactemail: contactEmail, 
@@ -48,7 +48,7 @@ export class SponsorService {
   }
 
   modifySponsor(sponsorData): any {
-    this.http.put<any>('http://localhost:8080/api/sponsors/modify', {
+    this.http.put<any>('http://localhost:8080/api/sponsors/modify/', {
       _id: sponsorData._id,
       _sponsorname: sponsorData._sponsorname,
       _contactname: sponsorData._contactname, 
@@ -59,7 +59,7 @@ export class SponsorService {
   }
 
   addAction(actionData): any {
-    this.http.post<any>("http://localhost:8080/api/sponsors/addAction", {
+    this.http.post<any>("http://localhost:8080/api/sponsors/addAction/", {
       _id: actionData._id,
       _actiontype: actionData._actionType,
       _actiondate: actionData._actionDate,
