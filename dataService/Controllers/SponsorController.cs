@@ -3,6 +3,8 @@ using dataService.Domain.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System;
 
 namespace dataService.Controllers {
 
@@ -18,9 +20,19 @@ namespace dataService.Controllers {
         }
 
         [HttpGet]
-        public ActionResult<List<sponsors>> GetAll()
+        public List<sponsors> Count(string sponsorname="", string contactname="", string contactemail="", string status="")
         {
-            return _context.sponsors.ToList();
+            
+            var sponsors = from s in _context.sponsors
+            where (s.sponsorname.ToLower().Contains(sponsorname.ToLower()))
+            where (s.contactname.ToLower().Contains(contactname.ToLower()))
+            where (s.contactemail.ToLower().Contains(contactemail.ToLower()))
+            where (s.status.ToLower().Contains(status.ToLower()))
+            select s;
+          
+          
+            return sponsors.ToList();
+
         }
 
 
