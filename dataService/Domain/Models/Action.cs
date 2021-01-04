@@ -10,6 +10,7 @@ namespace dataService.Domain.Models {
         public string actiondate{get; set;}
         public string actionuser{get; set;}
         public string actiondetails{get; set;}
+        public float netfinancialchange{get; set;}
 
         public int sponsors_id {get; set;}
         public sponsors sponsors {get; set;}

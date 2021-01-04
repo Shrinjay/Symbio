@@ -10,6 +10,7 @@ namespace dataService.Domain.Models{
         public string contactname{get; set;}
         public string contactemail{get; set;}
         public string status{get; set;}
+
         public string image {get; set;}
 
         public IList<actions> sponsoractions {get; set;} = new List<actions>();

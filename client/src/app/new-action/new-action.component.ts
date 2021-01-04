@@ -22,18 +22,20 @@ export class NewActionComponent implements OnInit {
           _actionType: null,
           _actionDate: null, 
           _actionUser: null, 
-          _actionDetails: null
+          _actionDetails: null,
+          _netfinancialchange: null
       })
     }
 
   onSubmit(data) {
+    if (data._actionType=="Payment TO") data._netfinancialchange *= -1
     let actionData = {
       _id: this.selected,
       _actionType: data._actionType,
       _actionDate: data._actionDate,
       _actionUser: data._actionUser,
-      _actionDetails: data._actionDetails
-      
+      _actionDetails: data._actionDetails,
+      _netfinancialchange: data._netfinancialchange
     }
     this.sponsorService.addAction(actionData)
   }

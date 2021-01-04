@@ -45,3 +45,14 @@
 /home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Microsoft.Extensions.DependencyInjection.dll
 /home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Humanizer.dll
 /home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Common.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Common.Abstractions.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Common.Http.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Connector.Abstractions.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Connector.ConnectorBase.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Discovery.Abstractions.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Discovery.ClientBase.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Discovery.ClientCore.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Extensions.Configuration.Abstractions.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/System.Reflection.MetadataLoadContext.dll
+/home/shrinjay/Documents/Projects/Sponsorship-Manager/JavaBackend/dataService/bin/Debug/net5.0/Steeltoe.Discovery.Eureka.dll

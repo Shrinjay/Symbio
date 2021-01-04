@@ -8,7 +8,7 @@ using System;
 
 namespace dataService.Controllers {
 
-    [Route("/api/[controller]")]
+    [Route("/")]
     [ApiController]
     public class SponsorController : Controller {
 
@@ -20,19 +20,17 @@ namespace dataService.Controllers {
         }
 
         [HttpGet]
-        public List<sponsors> Count(string sponsorname="", string contactname="", string contactemail="", string status="")
-        {
-            
+        public List<sponsors> GetSpecific(sponsors querySponsor)
+        {  
+            Console.WriteLine(querySponsor);
             var sponsors = from s in _context.sponsors
-            where (s.sponsorname.ToLower().Contains(sponsorname.ToLower()))
-            where (s.contactname.ToLower().Contains(contactname.ToLower()))
-            where (s.contactemail.ToLower().Contains(contactemail.ToLower()))
-            where (s.status.ToLower().Contains(status.ToLower()))
+            where (s.sponsorname.ToLower().Contains(querySponsor.sponsorname.ToLower()))
+            where (s.contactname.ToLower().Contains(querySponsor.contactname.ToLower()))
+            where (s.contactemail.ToLower().Contains(querySponsor.contactemail.ToLower()))
+            where (s.status.ToLower().Contains(querySponsor.status.ToLower()))
             select s;
           
-          
             return sponsors.ToList();
-
         }
 
 

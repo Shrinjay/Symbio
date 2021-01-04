@@ -38,6 +38,9 @@ namespace dataService.Migrations
                     b.Property<string>("actionuser")
                         .HasColumnType("text");
 
+                    b.Property<float>("netfinancialchange")
+                        .HasColumnType("real");
+
                     b.Property<int>("sponsors_id")
                         .HasColumnType("integer");
 

@@ -70,6 +70,14 @@
               "target": "Package",
               "version": "[5.0.1, )"
             },
+            "Steeltoe.Discovery.ClientCore": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
+            "Steeltoe.Discovery.Eureka": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"

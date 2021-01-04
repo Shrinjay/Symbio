@@ -64,7 +64,8 @@ export class SponsorService {
       _actiontype: actionData._actionType,
       _actiondate: actionData._actionDate,
       _actionuser: actionData._actionUser,
-      _actiondetails: actionData._actionDetails
+      _actiondetails: actionData._actionDetails,
+      _netfinancialchange: actionData._netfinancialchange
     }).subscribe(data=>{return data})
   }
 

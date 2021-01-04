@@ -29,6 +29,8 @@ public class actions {
     private String actionuser;
     @Column(name="actiondetails")
     private String actiondetails;
+    @Column(name="netfinancialchange")
+    private float netfinancialchange;
 
     public actions() {}
 
@@ -57,4 +59,7 @@ public class actions {
 
     public String get_actiondetails() {return actiondetails;}
     public void set_actiondetails(String actiondetails) {this.actiondetails = actiondetails;}
+
+    public float get_netfinancialchange() {return netfinancialchange;}
+    public void set_netfinancialchange(float netfinancialchange) {this.netfinancialchange = netfinancialchange;}
 }

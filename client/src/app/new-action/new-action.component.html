@@ -19,7 +19,16 @@
                       <option>Discussion</option>
                       <option>Proposal</option>
                       <option>Finalization</option>
+                      <option>Meeting</option>
+                      <option>Payment TO</option>
+                      <option>Payment FROM</option>
+                      <option>Other</option>
                   </select>
+              </div>
+              <div>
+                <label *ngIf="newAction.value._actionType=='Payment TO' || newAction.value._actionType=='Payment FROM'"  for="_netfinancialchange">Payment Amount: </label>
+                <input *ngIf="newAction.value._actionType=='Payment TO' || newAction.value._actionType=='Payment FROM'" id="_netfinancialchange" formControlName="_netfinancialchange" class="form-control" 
+                type="number" />
               </div>
               <div>
                   <label for="_actionDate">When did this happen?</label>
