@@ -42,18 +42,18 @@ public class UserController {
  private String jwt_issuer;
 
  UserController() {
-  try {
-   // In Dev environment
-   Dotenv dotenv = Dotenv.load();
-   jwt_secret = dotenv.get("jwt_secret");
-   jwt_issuer = dotenv.get("jwt_issuer");
+   try {
+    // In Dev environment
+    Dotenv dotenv = Dotenv.load();
+    jwt_secret = dotenv.get("jwt_secret");
+    jwt_issuer = dotenv.get("jwt_issuer");
+   }
+   catch (DotenvException e) {
+    // In Prod environment
+    jwt_secret = System.getenv("jwt_secret");
+    jwt_issuer = System.getenv("jwt_issuer");
+   }
   }
-  catch (DotenvException e) {
-   // In Prod environment
-   jwt_secret = System.getenv("jwt_secret");
-   jwt_issuer = System.getenv("jwt_issuer");
-  }
- }
 
  @CrossOrigin
  @GetMapping("/wake/")
