@@ -33,20 +33,23 @@ import com.symbio.userService.models.LoginRequest;
 public class UserController {
 
 
- //Inject sponsors repository
+ //Inject users repository
  @Autowired
  private UserRepo userRepo;
 
+ //JWT Secrets
  private String jwt_secret;
  private String jwt_issuer;
 
  UserController() {
   try {
+   // In Dev environment
    Dotenv dotenv = Dotenv.load();
    jwt_secret = dotenv.get("jwt_secret");
    jwt_issuer = dotenv.get("jwt_issuer");
   }
   catch (DotenvException e) {
+   // In Prod environment
    jwt_secret = System.getenv("jwt_secret");
    jwt_issuer = System.getenv("jwt_issuer");
   }
@@ -58,38 +61,42 @@ public class UserController {
   return true;
  }
 
- //Endpoint to get all sponsors
  @CrossOrigin
- @PostMapping("/login")//Maps GET requests to the /greeting endpoint to the greeting() function
+ @PostMapping("/login")
  public String login(@RequestBody LoginRequest body) {
   User user = userRepo.findByUsername(body.username);
+
   if (user == null) {
    return "User does not exist";
   }
 
   boolean valid = BCrypt.checkpw(body.password, user.getPassword());
+
   if (valid) {
    Algorithm algorithm = Algorithm.HMAC512(jwt_secret);
+
    Map<String, String> payload = new HashMap<String, String>();
    payload.put("user", user.getUsername());
    payload.put("role", user.getRole());
+
    return JWT.create()
            .withPayload(payload)
            .withIssuer(jwt_issuer)
            .sign(algorithm);
-  } else {
-   return "Invalid Password";
   }
 
+  else {
+   return "Invalid Password";
+  }
  }
 
  @CrossOrigin
  @PostMapping("/user")
- public boolean createUser(@RequestBody User body) {
+ public User createUser(@RequestBody User body) {
   String hashed_pw = BCrypt.hashpw(body.getPassword(), BCrypt.gensalt());
-  body.setPassword(hashed_pw);
 
+  body.setPassword(hashed_pw);
   userRepo.save(body);
-  return true;
+  return body;
  }
 }
