@@ -1,6 +1,6 @@
 import {FormBuilder} from '@angular/forms'
 import { Component, OnInit, Input } from '@angular/core';
-import {SponsorService} from '../sponsor-service.service';
+import {ApiService} from '../api-service.service';
 import {GlobalToggleService} from '../global-toggle.service'
 declare var $: any;
 
@@ -16,7 +16,7 @@ export class NewActionComponent implements OnInit {
 
   newAction
 
-  constructor(private sponsorService: SponsorService,
+  constructor(private apiService: ApiService,
     private formBuilder: FormBuilder, private toggleService:  GlobalToggleService) { 
       this.newAction = this.formBuilder.group({
           _actionType: null,
@@ -37,7 +37,7 @@ export class NewActionComponent implements OnInit {
       _actionDetails: data._actionDetails,
       _netfinancialchange: data._netfinancialchange
     }
-    this.sponsorService.addAction(actionData)
+    this.apiService.addAction(actionData)
   }
 
   ngOnInit(): void {

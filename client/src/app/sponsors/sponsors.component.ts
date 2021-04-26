@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SponsorService} from '../sponsor-service.service';
+import {ApiService} from '../api-service.service';
 import {Sponsor} from '../Sponsor';
 import {DomSanitizer} from '@angular/platform-browser'
 import { HttpParams } from '@angular/common/http';
@@ -21,7 +21,7 @@ export class SponsorsComponent implements OnInit {
   })
   emails: Object={}
   
-  constructor(private sponsorService: SponsorService,
+  constructor(private apiService: ApiService,
     private sanitizer: DomSanitizer, private toggleService: GlobalToggleService) { }
   
   //Get sponsors on load.
@@ -43,7 +43,7 @@ export class SponsorsComponent implements OnInit {
 
   //Get sponsors
   getHeroes(params): void {
-      this.sponsorService.getSponsors(params).subscribe(sponsors => {
+      this.apiService.getSponsors(params).subscribe(sponsors => {
         sponsors.forEach(sponsor => sponsor.expandActions=false)
         this.sponsors=sponsors
         this.getPics()
@@ -52,7 +52,7 @@ export class SponsorsComponent implements OnInit {
 
   //Get list of emails from API
   getMail(keyword): void {
-    this.sponsorService.getMail(keyword).subscribe(mail => {
+    this.apiService.getMail(keyword).subscribe(mail => {
       this.emails[keyword] = Object.entries(mail).slice(0, 5)
       console.log(keyword)
       console.log(mail)
@@ -70,10 +70,10 @@ export class SponsorsComponent implements OnInit {
       }
       //If sponsor doesn't have an image, get an image from the google images API, and save it to the sponsor's database entry.
       else {
-        this.sponsorService.getPics(sponsor._sponsorname).subscribe(res=>{
+        this.apiService.getPics(sponsor._sponsorname).subscribe(res=>{
           this.images[sponsor._sponsorname]=res['items'][0]['image']['thumbnailLink']
           sponsor._image = res['items'][0]['image']['thumbnailLink']
-          this.sponsorService.modifySponsor(sponsor)
+          this.apiService.modifySponsor(sponsor)
        })
       }
       //Get emails after sponsor logos are loaded.

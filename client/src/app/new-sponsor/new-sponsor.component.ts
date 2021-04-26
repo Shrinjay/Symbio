@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import {SponsorService} from '../sponsor-service.service';
+import {ApiService} from '../api-service.service';
 import { Sponsor } from '../Sponsor';
 
 //Handle form logic and API request to add a new sponsor.
@@ -14,7 +14,7 @@ export class NewSponsorComponent implements OnInit {
   newSponsor;
 
   constructor(private formBuilder: FormBuilder,
-    private sponsorService: SponsorService) { 
+    private apiService: ApiService) { 
     this.newSponsor = this.formBuilder.group({
       _sponsorName: null, 
       _contactName: null,
@@ -24,9 +24,9 @@ export class NewSponsorComponent implements OnInit {
     })
   }
 
-  //Handle submission through sponsorService
+  //Handle submission through apiService
   onSubmit(data) {
-    this.sponsorService.addSponsor(data._sponsorName, data._contactName, data._contactEmail, data._status, data._image)
+    this.apiService.addSponsor(data._sponsorName, data._contactName, data._contactEmail, data._status, data._image)
     .then(()=>{this.newSponsor.reset()
       window.location.reload(); })
   }

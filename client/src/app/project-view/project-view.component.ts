@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SponsorService} from '../sponsor-service.service';
+import {ApiService} from '../api-service.service';
 import {Sponsor} from '../Sponsor';
 import {GlobalToggleService} from '../global-toggle.service';
 
@@ -10,7 +10,7 @@ import {GlobalToggleService} from '../global-toggle.service';
 })
 export class ProjectViewComponent implements OnInit {
 
-  constructor(private sponsorService: SponsorService, private toggleService: GlobalToggleService) { }
+  constructor(private apiService: ApiService, private toggleService: GlobalToggleService) { }
 
   projects: Sponsor[]
   statusLookup: Object = {
@@ -27,7 +27,7 @@ export class ProjectViewComponent implements OnInit {
 
   getProjects(params)
   {
-    this.sponsorService.getSponsors(params).subscribe(projects => this.projects=projects)
+    this.apiService.getSponsors(params).subscribe(projects => this.projects=projects)
   }
 
   onClick(event)

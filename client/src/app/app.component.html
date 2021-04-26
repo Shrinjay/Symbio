@@ -1,5 +1,6 @@
 <!--Root HTML for the application, containing the router outlet and the main sponsor display-->
-<div class="container-fluid">
+
+<div class="container-fluid" *ngIf="isLoaded">
     <div class="row p-3" id="header">
         <b>Symbio</b>   
     </div>
@@ -20,6 +21,8 @@
     </div>
 
 </div>
+
+
 
 
 <router-outlet></router-outlet>

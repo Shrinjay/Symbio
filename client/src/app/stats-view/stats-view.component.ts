@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SponsorService} from '../sponsor-service.service';
+import {ApiService} from '../api-service.service';
 import {Sponsor} from '../Sponsor';
 import {DomSanitizer} from '@angular/platform-browser'
 import Plotly from 'plotly.js-dist'
@@ -14,14 +14,14 @@ export class StatsViewComponent implements OnInit {
   contacted: Number
   identified: Number
 
-  constructor(private sponsorService: SponsorService,
+  constructor(private apiService: ApiService,
     private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-     this.sponsorService.getSponsorNum({_status: "Established"}).subscribe(established => this.established = established)
-      this.sponsorService.getSponsorNum({_status: "Negotiating"}).subscribe(negotiating => this.negotiating = negotiating)
-      this.sponsorService.getSponsorNum({_status: "Contacted"}).subscribe(contacted => this.contacted=contacted)
-      this.sponsorService.getSponsorNum({_status: "Identified"}).subscribe(identified=>this.identified=identified)
+     this.apiService.getSponsorNum({_status: "Established"}).subscribe(established => this.established = established)
+      this.apiService.getSponsorNum({_status: "Negotiating"}).subscribe(negotiating => this.negotiating = negotiating)
+      this.apiService.getSponsorNum({_status: "Contacted"}).subscribe(contacted => this.contacted=contacted)
+      this.apiService.getSponsorNum({_status: "Identified"}).subscribe(identified=>this.identified=identified)
       this.generateCards()
   }
 

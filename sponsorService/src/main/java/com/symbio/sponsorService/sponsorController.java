@@ -38,6 +38,12 @@ public class sponsorController {
  //Inject sponsors repository
  @Autowired 
  private sponsorsRepo repository;
+
+ @CrossOrigin
+ @GetMapping("/wake/")
+ public boolean wake() {
+     return true;
+ }
  
  //Endpoint to get all sponsors
  @CrossOrigin
@@ -91,7 +97,12 @@ public class sponsorController {
      
      List<actions> existingActions = new ArrayList<actions>();
      if (sponsor.get_actions()!=null) existingActions = sponsor.get_actions();
-     existingActions.add(new actions(new AtomicLong().longValue(), newAction.get_actiontype(), newAction.get_actiondate(), newAction.get_actionuser(), newAction.get_actiondetails()));
+     existingActions.add(
+             new actions(
+                     new AtomicLong().longValue(), newAction.get_actiontype(), newAction.get_actiondate(),
+                     newAction.get_actionuser(), newAction.get_actiondetails()
+             )
+     );
      sponsor.set_actions(existingActions);
      repository.saveAndFlush(sponsor);
      return sponsor;

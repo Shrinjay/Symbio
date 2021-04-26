@@ -110,6 +110,11 @@ public class mailController {
      }
  }
 
+    @CrossOrigin
+    @GetMapping("/wake/")
+    public boolean wake() {
+        return true;
+    }
  
     //Endpoint to get email from user's inbox. 
     @CrossOrigin

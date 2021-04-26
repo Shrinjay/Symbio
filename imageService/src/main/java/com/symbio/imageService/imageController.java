@@ -2,6 +2,7 @@ package com.symbio.imageService;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,6 +41,12 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class imageController {
 
+    @Value("${search.api_key}")
+    String API_KEY;
+
+    @Value("${search.cx_key}")
+    String CX_KEY;
+
      //Function used to encode URL strings
  private static String encoder(String toEncode) {
     try {
@@ -51,8 +58,13 @@ public class imageController {
     }
 }
 
-    //Load dotenv to access .env file
- Dotenv dotenv = Dotenv.load();
+
+
+@CrossOrigin
+@GetMapping("/wake/")
+public boolean wake() {
+    return true;
+}
 
     //Endpoint to get an image from the google images AP.
 @CrossOrigin
@@ -65,9 +77,9 @@ public String getImages(@RequestParam String name)
     //PULL THIS INTO ITS OWN FUNCTION
     StringBuilder req = new StringBuilder("https://www.googleapis.com/customsearch/v1?");
     req.append("key=");
-    req.append(dotenv.get("API_KEY"));
+    req.append(API_KEY);
     req.append("&cx=");
-    req.append(dotenv.get("CX_KEY"));
+    req.append(CX_KEY);
     req.append("&q=");
     req.append(encoder(nameReq.toString()));
     req.append("&searchType=image&alt=json");
